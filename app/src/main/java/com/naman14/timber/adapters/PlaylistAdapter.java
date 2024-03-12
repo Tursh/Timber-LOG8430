@@ -234,7 +234,8 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ItemHo
 
         @Override
         public void onClick(View v) {
-            NavigationUtils.navigateToPlaylistDetail(mContext, getPlaylistType(getAdapterPosition()), (long) albumArt.getTag(), String.valueOf(title.getText()), foregroundColor, arraylist.get(getAdapterPosition()).id, null);
+            Playlist playlist = new Playlist(arraylist.get(getAdapterPosition()).id, String.valueOf(title.getText()), arraylist.size(), (long) albumArt.getTag())
+            NavigationUtils.navigateToPlaylistDetail(mContext, getPlaylistType(getAdapterPosition()), playlist, foregroundColor, null);
 
         }
 

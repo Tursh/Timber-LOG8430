@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.naman14.timber.R;
+import com.naman14.timber.models.Playlist;
 import com.naman14.timber.activities.MainActivity;
 import com.naman14.timber.activities.NowPlayingActivity;
 import com.naman14.timber.activities.PlaylistDetailActivity;
@@ -127,13 +128,13 @@ public class NavigationUtils {
 
 
     @TargetApi(21)
-    public static void navigateToPlaylistDetail(Activity context, String action, long firstAlbumID, String playlistName, int foregroundcolor, long playlistID, ArrayList<Pair> transitionViews) {
+    public static void navigateToPlaylistDetail(Activity context, String action, Playlist playlist, int foregroundcolor, ArrayList<Pair> transitionViews) {
         final Intent intent = new Intent(context, PlaylistDetailActivity.class);
         intent.setAction(action);
-        intent.putExtra(Constants.PLAYLIST_ID, playlistID);
+        intent.putExtra(Constants.PLAYLIST_ID, playlist.id);
         intent.putExtra(Constants.PLAYLIST_FOREGROUND_COLOR, foregroundcolor);
-        intent.putExtra(Constants.ALBUM_ID, firstAlbumID);
-        intent.putExtra(Constants.PLAYLIST_NAME, playlistName);
+        intent.putExtra(Constants.ALBUM_ID, playlist.firstAlbumID);
+        intent.putExtra(Constants.PLAYLIST_NAME, playlist.name);
         intent.putExtra(Constants.ACTIVITY_TRANSITION, transitionViews != null);
 
         if (transitionViews != null && TimberUtils.isLollipop()) {

@@ -95,7 +95,7 @@ public class PlaylistPagerFragment extends Fragment {
                 tranitionViews.add(0, Pair.create((View) playlistame, "transition_playlist_name"));
                 tranitionViews.add(1, Pair.create((View) playlistImage, "transition_album_art"));
                 tranitionViews.add(2, Pair.create(foreground, "transition_foreground"));
-                NavigationUtils.navigateToPlaylistDetail(getActivity(), getPlaylistType(), firstAlbumID, String.valueOf(playlistame.getText()), foregroundColor, playlist.id, tranitionViews);
+                NavigationUtils.navigateToPlaylistDetail(getActivity(), getPlaylistType(), playlist, foregroundColor, tranitionViews);
             }
         });
 

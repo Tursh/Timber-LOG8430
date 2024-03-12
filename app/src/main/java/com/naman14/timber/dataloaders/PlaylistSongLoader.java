@@ -47,40 +47,38 @@ public class PlaylistSongLoader {
 
         mCursor = makePlaylistSongCursor(context, mPlaylistID);
 
-        if (mCursor != null) {
-            boolean runCleanup = false;
-            if (mCursor.getCount() != playlistCount) {
-                runCleanup = true;
-            }
+        if (mCursor == null)
+            return mSongList;
 
-            if (!runCleanup && mCursor.moveToFirst()) {
-                final int playOrderCol = mCursor.getColumnIndexOrThrow(Playlists.Members.PLAY_ORDER);
+        boolean runCleanup = false;
 
-                int lastPlayOrder = -1;
-                do {
-                    int playOrder = mCursor.getInt(playOrderCol);
-                    if (playOrder == lastPlayOrder) {
-                        runCleanup = true;
-                        break;
-                    }
-                    lastPlayOrder = playOrder;
-                } while (mCursor.moveToNext());
-            }
+        if () {
+            runCleanup = true;
+        }
 
-            if (runCleanup) {
-
-                cleanupPlaylist(context, mPlaylistID, mCursor);
-
-                mCursor.close();
-                mCursor = makePlaylistSongCursor(context, mPlaylistID);
-                if (mCursor != null) {
+        if (!runCleanup && mCursor.moveToFirst()) {
+            final int playOrderCol = mCursor.getColumnIndexOrThrow(Playlists.Members.PLAY_ORDER);
+            int lastPlayOrder = -1;
+            do {
+                int playOrder = mCursor.getInt(playOrderCol);
+                if (playOrder == lastPlayOrder) {
+                    runCleanup = true;
+                    break;
                 }
+                lastPlayOrder = playOrder;
+            } while (mCursor.moveToNext());
+        }
+
+        if (runCleanup) {
+            cleanupPlaylist(context, mPlaylistID, mCursor);
+            mCursor.close();
+            mCursor = makePlaylistSongCursor(context, mPlaylistID);
+            if (mCursor != null) {
             }
         }
 
-        if (mCursor != null && mCursor.moveToFirst()) {
+        if (mCursor.moveToFirst()) {
             do {
-
                 final long id = mCursor.getLong(mCursor
                         .getColumnIndexOrThrow(MediaStore.Audio.Playlists.Members.AUDIO_ID));
 
@@ -113,10 +111,9 @@ public class PlaylistSongLoader {
             } while (mCursor.moveToNext());
         }
         // Close the cursor
-        if (mCursor != null) {
-            mCursor.close();
-            mCursor = null;
-        }
+        mCursor.close();
+        mCursor = null;
+
         return mSongList;
     }
 

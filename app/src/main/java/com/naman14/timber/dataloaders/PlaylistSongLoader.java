@@ -52,7 +52,7 @@ public class PlaylistSongLoader {
 
         boolean runCleanup = false;
 
-        if () {
+        if (mCursor.getCount() != playlistCount) {
             runCleanup = true;
         }
 
